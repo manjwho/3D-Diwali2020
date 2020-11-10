@@ -1,14 +1,13 @@
-// from Polar Fireworks by D_Snyder
+// 2D rose func from Polar Fireworks by D_Snyder
 
-function rose(theta, n=5, d=8)
+function rose(theta,gamma, n=5, d=8)
 {
   let k = n/d
-  let r = cos(k*theta*2); // radius? -- able to get dotted lines
-  let x = r*cos(theta*8); // rotation of each particle
-  let y = r*sin(theta*8);
-  let z = y/x;
-  //console.log(z);
-  return createVector(x, y, z/10); //play with z val
+  let r = cos(k*theta); 
+  let x = r*cos(theta);
+  let y = r*sin(theta);
+  let z = r*sin(gamma*k); // gamma var contrib by Archit
+  return createVector(x, y, z); 
 }
 
 // Daniel Shiffman
@@ -26,8 +25,8 @@ class Particle {
     if (this.firework) {
       this.vel = createVector(0, random(-18, -8), 0); // height of burst
     } else {
-      this.vel = rose(map(index, 0, 719, 0, PI*d), n, d);
-      this.vel.mult(10); // explode form
+      this.vel = rose(map(index, 0, 120, 0, PI*4), map(index, 0,120, -2*PI, 2*PI), n, d);
+      this.vel.mult(10); // exploded form. theta and gamma mapped to half the number of partcicles -1 - ie. 120
     }
   }
 
@@ -58,11 +57,11 @@ class Particle {
     let z;
 
     if (!this.firework) {  // for the burst
-      strokeWeight(2);
-      stroke(this.hu, 255, 255, this.lifespan); //[HSB, Alpha]
-      z = random (-2, 2);
+      strokeWeight(map(this.lifespan, 255, 0, 3, 0));
+      stroke(this.hu, 255, 255); //[HSB, Alpha]
+     // z = random (-2, 2);
     } else {  // for the rocket
-      strokeWeight(4);
+      strokeWeight(5);
       stroke(this.hu, 255, 255);
       z = 0;
     }
