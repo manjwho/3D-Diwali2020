@@ -40,9 +40,9 @@ class Firework {
   }
 
   explode() {
-    let n = int(random(1, 10)) // shape - loops
-    let d = int(random(1, 7)) // shape - spokes
-    for (let i = 0; i < 200; i++) // no. of particles
+    let n = int(random(1,7)) // shape - spokes
+    let d = int(random(1,7))// shape - loops
+    for (let i = 0; i < 241; i++) // no. of particles
       {
       const p = new Particle(this.firework.pos.x, this.firework.pos.y, this.firework.pos.z, this.hu, false, i, n,d);
       this.particles.push(p);
