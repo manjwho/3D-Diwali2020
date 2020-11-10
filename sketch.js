@@ -32,8 +32,11 @@ function draw() {
   background(0);
   
   //orbitControl();
+   rotateY(millis()/10000);
+  //rotateX(millis()/20000);
   
   translate (-width/2, -height/2);
+ 
   if (random(1) < 0.1) { // density of fireworks
     fireworks.push(new Firework());
   }
